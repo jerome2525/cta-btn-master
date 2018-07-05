@@ -13,4 +13,4 @@ Domain Path: Domain Path
 
 require plugin_dir_path( __FILE__ ) . 'inc/cta-btn.php';
 
-$genesis_camp = new Cta_Btn();
+new Cta_Btn();

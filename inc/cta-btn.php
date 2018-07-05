@@ -9,8 +9,8 @@ class Cta_Btn {
 	public function __construct() {
 
 		$this->load_includes();
-		$Admin = new Cta_Admin;
-		$Public = new Cta_Public;
+		new Cta_Admin;
+		new Cta_Public;
 		$this->load_assets();
 
 	}
