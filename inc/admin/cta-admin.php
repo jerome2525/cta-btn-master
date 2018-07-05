@@ -5,8 +5,9 @@ class Cta_Admin {
 
 		$this->load_includes();
 		$this->register_post_type();
-		$meta_boxes = new Meta_Boxes;
+		new Meta_Boxes;
 		$this->register_post_col();
+		$this->register_rem_view_links();
 
 	}
 
@@ -31,8 +32,10 @@ class Cta_Admin {
 	}
 
 	public function register_post_col() {
+
 		add_filter( 'manage_cta_posts_columns', array( $this, 'columns_head_cta' ), 10 );
 		add_action( 'manage_cta_posts_custom_column', array( $this, 'columns_content_cta' ), 10, 2 );
+
 	}
 
 	public function columns_head_cta( $defaults ) {
@@ -44,6 +47,40 @@ class Cta_Admin {
 	    if ( $column_name == 'cta_shortcode_column' ) {
 	        echo '[cta_button id=' . $cta_ID . ']';
 	    }
+	}
+
+	//Hide All view button,links in the post type admin
+	public function register_rem_view_links() {
+		add_filter( 'post_row_actions', array( $this, 'remove_view_row_action' ), 10, 1 );
+		add_action( 'wp_before_admin_bar_render', array( $this, 'remove_view_button_admin_bar' ) );
+		add_action( 'admin_head', array( $this, 'hide_view_button' ) );
+	}
+
+	public function remove_view_row_action( $actions ) {
+
+		if( get_post_type() === 'cta' ) {
+			unset( $actions['view'] );
+			return $actions;
+		}
+	
+	}
+
+	public function remove_view_button_admin_bar() {
+
+		global $wp_admin_bar;
+		if( get_post_type() === 'cta') {
+			$wp_admin_bar->remove_menu('view');
+		}
+
+	}
+
+	public function hide_view_button() {
+
+		$current_screen = get_current_screen();
+		if( $current_screen->post_type === 'cta' ) {
+			echo '<style>#edit-slug-box, #message a {display: none;}</style>';
+		}
+
 	}
 
 }

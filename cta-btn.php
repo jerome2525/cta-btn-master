@@ -14,3 +14,6 @@ Domain Path: Domain Path
 require plugin_dir_path( __FILE__ ) . 'inc/cta-btn.php';
 
 new Cta_Btn();
+
+
+
