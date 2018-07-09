@@ -4,6 +4,10 @@
  * @package  Cta_Btn
  */
 
+if( class_exists('Cta_Btn') ) {
+	return;
+}
+
 class Cta_Btn {
 
 	public function __construct() {

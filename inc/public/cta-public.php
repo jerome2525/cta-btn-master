@@ -1,4 +1,9 @@
 <?php 
+
+if( class_exists('Cta_Public') ) {
+	return;
+}
+
 class Cta_Public {
 
 	public function __construct() {

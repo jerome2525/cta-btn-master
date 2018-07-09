@@ -1,4 +1,8 @@
 <?php 
+if( class_exists('Cta_Admin') ) {
+	return;
+}
+
 class Cta_Admin {
 
 	public function __construct() {
